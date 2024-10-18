@@ -75,11 +75,11 @@ Clean:
 KernelSU:
   version:
     stable-pin:
-      - curl -LSs "https://raw.githubusercontent.com/ggsasda/KernelSU-nongki/refs/heads/main/kernel/setup.sh" | bash -s kernelsu-version
+      - curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh" | bash -s kernelsu-version
     stable:
-      - curl -LSs "https://raw.githubusercontent.com/ggsasda/KernelSU-nongki/refs/heads/main/kernel/setup.sh" | bash -
+      - curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh" | bash -
     unstable:
-      - curl -LSs "https://raw.githubusercontent.com/ggsasda/KernelSU-nongki/refs/heads/main/kernel/setup.sh" | bash -s main
+      - curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/refs/heads/main/kernel/setup.sh" | bash -s main
 
 AnyKernel3:
   version:
