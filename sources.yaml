@@ -48,7 +48,7 @@ DivestOS-13:
 
 Sage-Android-14:
   kernel:
-    - git clone https://github.com/Killerpac/android_kernel_realme_mt6785.git -b udc
+    - git clone https://github.com/Killerpac/android_kernel_realme_mt6785.git -b saga
   clang:
     - git clone --depth=1 https://gitlab.com/Jprimero15/lolz_clang.git -b main
   config:
