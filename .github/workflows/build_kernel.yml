@@ -52,37 +52,40 @@ jobs:
         run: |
           echo "${CLANG_PATH}" >> $GITHUB_PATH
         
-      - name: Compile kernel
-        run: |
-          chmod +x build.sh
-          ./build.sh
+      # - name: Compile kernel
+      #   run: |
+      #     chmod +x build.sh
+      #     ./build.sh
 
       - name: Make output directory for kernel
         run: |
           mkdir outw
-          mkdir outw/false
-          mkdir outw/true
+          mkdir outw/next
+          mkdir outw/stock
 
-      - name: Move kernel without KernelSU support to output directory
-        run: |
-          chmod +x move.sh
-          ./move.sh
+      # - name: Move kernel without KernelSU support to output directory
+      #   run: |
+      #     chmod +x move.sh
+      #     ./move.sh
 
-      - name: Clean build environment
-        run: |
-          chmod +x clean.sh
-          ./clean.sh
+      # - name: Clean build environment
+      #   run: |
+      #     chmod +x clean.sh
+      #     ./clean.sh
 
       - name: Set KERNELSU environment variable to true
-        run: echo "KERNELSU=true" >> $GITHUB_ENV
+        run: |
+          echo "KERNELSU=true" >> $GITHUB_ENV
 
       - name: Set KERNELSU_VERSION environment variable
-        run: echo "KERNELSU_VERSION=$(cat ksu_version.txt)" >> $GITHUB_ENV
-
-      - name: Add KernelSU support to kernel
         run: |
-          chmod +x kernelSU.sh
-          ./kernelSU.sh
+          echo "KERNELSU_VERSION=$(cat ksu_version.txt)" >> $GITHUB_ENV
+          echo "KERNELSU_NEXT_VERSION=$(cat ksu_next_version.txt)" >> $GITHUB_ENV
+
+      - name: Add KernelSU Next support to kernel
+        run: |
+          chmod +x kernelSU_Next.sh
+          ./kernelSU_Next.sh
 
       - name: Compile kernel with KernelSU support
         run: |
@@ -94,14 +97,34 @@ jobs:
           chmod +x move.sh
           ./move.sh
 
+      - name: Clean build environment
+        run: |
+          chmod +x clean.sh
+          ./clean.sh
+
+      - name: Add KernelSU support to kernel
+        run: |
+            chmod +x kernelSU.sh
+            ./kernelSU.sh
+  
+      - name: Compile kernel with KernelSU support
+        run: |
+            chmod +x build.sh
+            ./build.sh
+  
+      - name: Move kernel with KernelSU support to output directory
+        run: |
+            chmod +x move.sh
+            ./move.sh          
+
       - name: Clone AnyKernel3
         run: |
           chmod +x anykernel.sh
           ./anykernel.sh
 
-      - name: Set ZIP_NO_KSU and ZIP_KSU environment variables
+      - name: Set ZIP_KSU_NEXT and ZIP_KSU environment variables
         run: |
-          echo "ZIP_NO_KSU=${{ env.VERSION }}-NoKernelSU.zip" >> $GITHUB_ENV
+          echo "ZIP_KSU_NEXT=${{ env.VERSION }}-KernelSU_Next.zip" >> $GITHUB_ENV
           echo "ZIP_KSU=${{ env.VERSION }}-KernelSU-$(cat ksu_version.txt).zip" >> $GITHUB_ENV
 
       - name: Make AnyKernel3 zip
@@ -118,7 +141,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-             ${{ github.workspace }}/${{ env.ZIP_NO_KSU }}
+             ${{ github.workspace }}/${{ env.ZIP_KSU_NEXT }}
              ${{ github.workspace }}/${{ env.ZIP_KSU }}
           token: ${{ secrets.GITHUB_TOKEN }}
           name: KernelSU Release - ${{ env.KERNELSU_VERSION }}
@@ -126,6 +149,7 @@ jobs:
           body: |
              **Info:**
               - KernelSU Version: ${{ env.KERNELSU_VERSION }}.
+              - KernelSU Next Version: ${{ env.KERNELSU_NEXT_VERSION }}.
               
               **Installation:**
               - Download desired zip file.
