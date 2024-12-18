@@ -30,3 +30,6 @@ To flash the kernel onto your device:
 5. Reboot your device.
 
 Please note that this workflow is provided as-is without any warranties. Use it at your own risk. Ensure compatibility and follow device-specific guidelines before flashing custom kernels. Read and understand the installation instructions and warnings before proceeding with kernel installation.
+
+### [KernelSU-NonGki](https://github.com/rsuntk/KernelSU)
+### [KernelSU-Next](https://github.com/rifsxd/KernelSU-Next)

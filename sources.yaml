@@ -65,6 +65,8 @@ Sage-Android-14:
 Clean:
   out:
     - rm -rf out
+  kernelsu:
+    - rm -rf KernelSU
   kernel:
     - make mrproper
   custom:

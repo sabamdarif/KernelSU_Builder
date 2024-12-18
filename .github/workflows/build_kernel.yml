@@ -107,6 +107,10 @@ jobs:
           chmod +x move.sh
           ./move.sh
 
+      - name: Set KERNELSU Stock environment variable to true
+        run: |
+            echo "KERNELSU_STOCK=true" >> $GITHUB_ENV
+
       - name: Clean build environment
         run: |
           chmod +x clean.sh
@@ -134,7 +138,7 @@ jobs:
 
       - name: Set ZIP_KSU_NEXT and ZIP_KSU environment variables
         run: |
-          echo "ZIP_KSU_NEXT=${{ env.VERSION }}-KernelSU_Next.zip" >> $GITHUB_ENV
+          echo "ZIP_KSU_NEXT=${{ env.VERSION }}-KernelSU_Next-$(cat ksu_next_version.txt).zip" >> $GITHUB_ENV
           echo "ZIP_KSU=${{ env.VERSION }}-KernelSU-$(cat ksu_version.txt).zip" >> $GITHUB_ENV
 
       - name: Make AnyKernel3 zip

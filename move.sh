@@ -39,7 +39,7 @@ fi
 target="${GITHUB_WORKSPACE}/kernel/$target"
 
 # Check the KERNELSU environment variable and move the target to the appropriate directory
-if [ "${KERNELSU}" == "true" ]
+if [ "${KERNELSU_STOCK}" == "true" ]
 then
     mv $target "${GITHUB_WORKSPACE}/outw/stock"
 else
